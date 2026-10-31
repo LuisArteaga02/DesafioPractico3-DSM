@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafiopractico3.adapters.AlumnoAdapter
 import com.example.desafiopractico3.databinding.ActivityMainBinding
 import com.example.desafiopractico3.Interfaces.RetrofitClient
+import com.example.desafiopractico3.models.Recurso
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,7 +21,9 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: AlumnoAdapter
-
+    private val favoritosDelUsuario = mutableSetOf<Int>()
+    private val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
+    private val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -34,13 +37,22 @@ class MainActivity : AppCompatActivity() {
         obtenerRecursosDesdeApi()
     }
     private fun configurarRecyclerView() {
-        adapter = AlumnoAdapter(emptyList()) { url ->
-            abrirEnlaceEnNavegador(url)
-        }
+        adapter = AlumnoAdapter(
+            listaRecursos = emptyList(),
+            favoritosIds = favoritosDelUsuario,
+            onAbrirEnlaceClick = { url -> abrirEnlaceEnNavegador(url) },
+            onFavoritoClick = { recurso, marcarComoFavorito ->
+                gestionarFavorito(recurso, marcarComoFavorito)
+            },
+            onRatingChange = { recurso, nuevaCalificacion ->
+                // TODO: Enviar el rating por PUT a Retrofit
+            }
+        )
         binding.rvRecursosAlumno.layoutManager = LinearLayoutManager(this)
         binding.rvRecursosAlumno.adapter = adapter
-    }
 
+        cargarFavoritosDeFirebase()
+    }
     private fun abrirEnlaceEnNavegador(url: String) {
         try {
             var urlFormateada = url
@@ -53,6 +65,42 @@ class MainActivity : AppCompatActivity() {
             Toast.makeText(this, "No se pudo abrir el enlace", Toast.LENGTH_SHORT).show()
         }
     }
+    private fun cargarFavoritosDeFirebase() {
+        if (uid.isEmpty()) return
+
+
+        db.collection("usuarios").document(uid).collection("favoritos")
+            .get()
+            .addOnSuccessListener { documentos ->
+                favoritosDelUsuario.clear()
+                for (doc in documentos) {
+                    val idRecurso = doc.getLong("idRecurso")?.toInt()
+                    if (idRecurso != null) favoritosDelUsuario.add(idRecurso)
+                }
+                adapter.notifyDataSetChanged()
+            }
+    }
+    private fun gestionarFavorito(recurso: Recurso, guardar: Boolean) {
+        val docRef = db.collection("usuarios").document(uid)
+            .collection("favoritos").document(recurso.id.toString())
+
+        if (guardar) {
+            val datosFavorito = hashMapOf(
+                "idRecurso" to recurso.id,
+                "titulo" to recurso.titulo
+            )
+            docRef.set(datosFavorito).addOnSuccessListener {
+                favoritosDelUsuario.add(recurso.id)
+                adapter.notifyDataSetChanged()
+            }
+        } else {
+            docRef.delete().addOnSuccessListener {
+                favoritosDelUsuario.remove(recurso.id)
+                adapter.notifyDataSetChanged()
+            }
+        }
+    }
+
     private fun configurarSwipeRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
             obtenerRecursosDesdeApi()
@@ -89,7 +137,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_docente, menu) // Reutilizamos el mismo menú de cerrar sesión
+        menuInflater.inflate(R.menu.menu_docente, menu)
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
