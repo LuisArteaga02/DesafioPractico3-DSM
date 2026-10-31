@@ -206,6 +206,18 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun configurarBuscador() {
+
+        binding.btnAbrirBuscador.setOnClickListener {
+            if (binding.cardBuscador.visibility == View.VISIBLE) {
+                binding.cardBuscador.visibility = View.GONE
+                // Al cerrar el buscador, limpiamos el texto para mostrar toda la lista
+                binding.searchView.setQuery("", false)
+            } else {
+                binding.cardBuscador.visibility = View.VISIBLE
+                binding.searchView.requestFocus()
+            }
+        }
+
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false

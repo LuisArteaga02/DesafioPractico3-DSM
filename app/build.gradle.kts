@@ -53,4 +53,5 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services:1.7.3")
     implementation(libs.androidx.swiperefreshlayout)
+    implementation("com.github.Dimezis:BlurView:version-3.1.0")
 }
