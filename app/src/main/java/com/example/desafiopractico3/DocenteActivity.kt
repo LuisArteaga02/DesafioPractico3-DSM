@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.desafiopractico3.Interfaces.RetrofitClient
 import com.example.desafiopractico3.adapters.RecursosAdapter
 import com.example.desafiopractico3.databinding.ActivityDocenteBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -71,38 +72,47 @@ class DocenteActivity : AppCompatActivity() {
 
     // --- LÓGICA DE API Y DATOS ---
 
-    private fun obtenerRecursosDesdeApi() {
-        binding.progressBarCentral.visibility = View.VISIBLE
 
-        // Usamos Corrutinas para no bloquear la interfaz principal
-        lifecycleScope.launch(Dispatchers.IO) {
-            try {
-                // Aquí va tu llamada a Retrofit. Ejemplo:
-                // val response = RetrofitClient.apiService.getRecursos()
-
-                // if (response.isSuccessful && response.body() != null) {
-                //     val lista = response.body()!!
-                //     withContext(Dispatchers.Main) {
-                //         adapter.actualizarLista(lista)
-                //     }
-                // } else {
-                //     mostrarError("Error en API: ${response.code()}")
-                // }
-
-            } catch (e: Exception) {
-                mostrarError("Error de red: ${e.message}")
-            } finally {
-                withContext(Dispatchers.Main) {
-                    binding.progressBarCentral.visibility = View.GONE
-                    binding.swipeRefresh.isRefreshing = false // Detener animación
-                }
-            }
-        }
-    }
 
     private suspend fun mostrarError(mensaje: String) {
         withContext(Dispatchers.Main) {
             Toast.makeText(this@DocenteActivity, mensaje, Toast.LENGTH_LONG).show()
+        }
+    }
+
+    private fun obtenerRecursosDesdeApi() {
+
+        binding.progressBarCentral.visibility = View.VISIBLE
+
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+
+                val response = RetrofitClient.apiService.getRecursos()
+
+                if (response.isSuccessful) {
+
+                    val lista = response.body() ?: emptyList()
+
+
+                    withContext(Dispatchers.Main) {
+                        adapter.actualizarLista(lista)
+                    }
+                } else {
+
+                    mostrarError("Error en API: Código ${response.code()}")
+                }
+
+            } catch (e: Exception) {
+
+                mostrarError("Error de red: Verifica tu conexión o el estado de Render.")
+            } finally {
+
+                withContext(Dispatchers.Main) {
+                    binding.progressBarCentral.visibility = View.GONE
+                    binding.swipeRefresh.isRefreshing = false 
+                }
+            }
         }
     }
 
