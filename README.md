@@ -5,8 +5,7 @@
 [Repositorio de Api de la aplicacion android /Recursos](https://github.com/YCartaArt02/api-dsm3)
 <br>
 [Enlace de Video sobre el funcionamiento de la aplicacion](https://drive.google.com/file/d/1cU6LSq8pxYZq4phmNTHycfIwbFdjqCSA/view?usp=sharing)
-<br>
-[Aplicacion Buildeada](https://drive.google.com/file/d/1zVk_Sh57UxUTKd3NclY6Sct0MbnepVeC/view?usp=sharing)
+
 
 ##  Pantallas de la Aplicación
 
