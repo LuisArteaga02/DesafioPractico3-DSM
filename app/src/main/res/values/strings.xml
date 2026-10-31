@@ -1,3 +1,42 @@
 <resources>
     <string name="app_name">DesafioPractico3</string>
+
+    <!-- Títulos de Pantallas -->
+    <string name="title_mis_recursos">Mis Recursos</string>
+    <string name="title_mis_favoritos">Mis Favoritos</string>
+    <string name="title_gestion">Gestión</string>
+    <string name="title_crear_cuenta">Crear Cuenta</string>
+    <string name="title_nuevo_recurso">Nuevo Recurso</string>
+    <string name="title_iniciar_sesion">Iniciar Sesión</string>
+
+    <!-- Subtítulos y Textos -->
+    <string name="subtitle_credenciales">Ingresa tus credenciales para continuar</string>
+    <string name="msg_sin_favoritos">Aún no tienes favoritos.</string>
+    <string name="lbl_selecciona_rol">Selecciona tu rol:</string>
+    <string name="lbl_ya_tienes_cuenta">¿Ya tienes cuenta? Inicia sesión aquí</string>
+    <string name="lbl_no_tienes_cuenta">¿No tienes cuenta? Regístrate aquí</string>
+    <string name="rb_alumno">Alumno</string>
+    <string name="rb_docente">Docente</string>
+
+    <!-- Campos de Texto (Hints) -->
+    <string name="hint_buscar_completo">Buscar por título o tipo...</string>
+    <string name="hint_buscar">Buscar...</string>
+    <string name="hint_correo">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_confirmar_password">Confirmar Contraseña</string>
+    <string name="hint_titulo_recurso">Título del recurso</string>
+    <string name="hint_tipo_recurso">Tipo de recurso</string>
+    <string name="hint_enlace">Enlace (URL)</string>
+    <string name="hint_descripcion">Descripción</string>
+
+    <!-- Botones -->
+    <string name="btn_registrarse">Registrarse</string>
+    <string name="btn_ingresar">Ingresar</string>
+    <string name="btn_guardar_recurso">Guardar Recurso</string>
+    <string name="btn_abrir_recurso">Abrir Recurso</string>
+    <string name="btn_editar">Editar</string>
+    <string name="btn_eliminar">Eliminar</string>
+
+    <!-- Accesibilidad -->
+    <string name="desc_agregar_recurso">Agregar recurso</string>
 </resources>
