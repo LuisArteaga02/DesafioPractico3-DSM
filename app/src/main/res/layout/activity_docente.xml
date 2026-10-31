@@ -40,7 +40,7 @@
                 app:queryBackground="@android:color/transparent" />
 
         </com.google.android.material.card.MaterialCardView>
-        
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <!-- Contenedor principal con SwipeRefresh para recargar -->

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.desafiopractico3.Interfaces.RetrofitClient
 import com.example.desafiopractico3.adapters.RecursosAdapter
 import com.example.desafiopractico3.databinding.ActivityDocenteBinding
+import com.example.desafiopractico3.models.Recurso
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,6 +23,7 @@ class DocenteActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDocenteBinding
     private lateinit var adapter: RecursosAdapter
+    private var listaCompletaRecursos: List<Recurso> = emptyList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +32,7 @@ class DocenteActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.topAppBar)
-
+        configurarBuscador()
         configurarRecyclerView()
         configurarSwipeRefresh()
         configurarFab()
@@ -97,11 +99,13 @@ class DocenteActivity : AppCompatActivity() {
 
                 if (response.isSuccessful) {
 
-                    val lista = response.body() ?: emptyList()
+                    listaCompletaRecursos = response.body() ?: emptyList()
 
 
                     withContext(Dispatchers.Main) {
-                        adapter.actualizarLista(lista)
+                        binding.searchView.setQuery("", false)
+                        binding.searchView.clearFocus()
+                        adapter.actualizarLista(listaCompletaRecursos)
                     }
                 } else {
 
@@ -130,6 +134,35 @@ class DocenteActivity : AppCompatActivity() {
             }
             .setNegativeButton("Cancelar", null)
             .show()
+    }
+
+    private fun configurarBuscador() {
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filtrarLista(newText ?: "")
+                return true
+            }
+        })
+    }
+
+    private fun filtrarLista(query: String) {
+        val textoBusqueda = query.lowercase().trim()
+
+        if (textoBusqueda.isEmpty()) {
+            adapter.actualizarLista(listaCompletaRecursos)
+            return
+        }
+
+        val listaFiltrada = listaCompletaRecursos.filter { recurso ->
+            recurso.titulo.lowercase().contains(textoBusqueda) ||
+                    recurso.tipo.lowercase().contains(textoBusqueda)
+        }
+
+        adapter.actualizarLista(listaFiltrada)
     }
 
     private fun eliminarRecursoEnApi(id: Int) {
