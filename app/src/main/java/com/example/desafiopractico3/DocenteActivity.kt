@@ -137,6 +137,20 @@ class DocenteActivity : AppCompatActivity() {
     }
 
     private fun configurarBuscador() {
+
+        binding.btnAbrirBuscador.setOnClickListener {
+            if (binding.cardBuscador.visibility == View.VISIBLE) {
+                // Si está visible, lo ocultamos y reseteamos la lista
+                binding.cardBuscador.visibility = View.GONE
+                binding.searchView.setQuery("", false)
+                binding.searchView.clearFocus()
+            } else {
+                // Si está oculto, lo mostramos y pedimos el foco del teclado
+                binding.cardBuscador.visibility = View.VISIBLE
+                binding.searchView.requestFocus()
+            }
+        }
+
         binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
