@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1050907978574",
+    "project_id": "desafiopractico3-dsm",
+    "storage_bucket": "desafiopractico3-dsm.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1050907978574:android:6345a0fd234bd8c454cc1f",
+        "android_client_info": {
+          "package_name": "com.example.desafiopractico3"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEzl4-9lGWWOME180fpkZFDul0veqahDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
