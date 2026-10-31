@@ -47,8 +47,8 @@ class LoginActivity : AppCompatActivity() {
 
                         // Enrutamiento condicional según el laboratorio
                         val intent = if (state.rol == "docente") {
-                          //  Intent(this@LoginActivity, DocenteActivity::class.java)
-                            Intent(this@LoginActivity, MainActivity::class.java)
+                            Intent(this@LoginActivity, DocenteActivity::class.java)
+                           // Intent(this@LoginActivity, MainActivity::class.java)
                         } else {
                            // Intent(this@LoginActivity, EstudianteActivity::class.java)
                             Intent(this@LoginActivity, MainActivity::class.java)
