@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="#40FFFFFF"> <!-- Color del efecto al presionar (blanco al 25%) -->
+
+    <item>
+        <shape android:shape="rectangle">
+            <!-- Radio muy alto para crear la forma de píldora -->
+            <corners android:radius="100dp" />
+
+            <!-- Fondo de cristal (blanco al 30% de opacidad) -->
+            <solid android:color="#4DFFFFFF" />
+
+            <!-- Borde brillante que simula el reflejo del cristal -->
+            <stroke
+                android:width="1.5dp"
+                android:color="#80FFFFFF" />
+        </shape>
+    </item>
+
+</ripple>

@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_gradiand_glass"
     android:padding="24dp">
 
     <LinearLayout
@@ -23,6 +24,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:background="@android:color/transparent"
             android:hint="Correo Electrónico"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -38,6 +40,7 @@
             android:layout_marginBottom="16dp"
             android:hint="Contraseña"
             app:passwordToggleEnabled="true"
+            android:background="@android:color/transparent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
@@ -52,12 +55,14 @@
             android:layout_marginBottom="16dp"
             android:hint="Confirmar Contraseña"
             app:passwordToggleEnabled="true"
+            android:background="@android:color/transparent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
@@ -78,6 +83,7 @@
                 android:id="@+id/rbAlumno"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Alumno"
                 android:checked="true"
                 android:layout_weight="1"/>
@@ -86,6 +92,7 @@
                 android:id="@+id/rbDocente"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
                 android:text="Docente"
                 android:layout_weight="1"/>
         </RadioGroup>
@@ -93,6 +100,7 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegistrar"
             android:layout_width="match_parent"
+            android:background="@drawable/bg_boton_cristal"
             android:layout_height="56dp"
             android:text="Registrarse"
             android:textSize="16sp"
@@ -109,6 +117,7 @@
             android:id="@+id/tvIrLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
             android:text="¿Ya tienes cuenta? Inicia sesión aquí"
             android:layout_gravity="center"
             android:textColor="?attr/colorPrimary"

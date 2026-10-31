@@ -24,6 +24,11 @@ class FormularioActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFormularioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val decorView = window.decorView
+        val rootView = decorView.findViewById<android.view.ViewGroup>(android.R.id.content)
+        val windowBackground = decorView.background
+
+
 
         configurarDropdownTipos()
 
