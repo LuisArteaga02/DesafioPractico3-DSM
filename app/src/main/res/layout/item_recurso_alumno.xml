@@ -74,6 +74,7 @@
                 android:scaleY="0.6"
                 android:transformPivotX="0dp"
                 android:transformPivotY="15dp"
+                android:progressTint="#e5de00"
                 app:layout_constraintTop_toTopOf="@id/tvTipo"
                 app:layout_constraintBottom_toBottomOf="@id/tvTipo"
                 app:layout_constraintStart_toEndOf="@id/tvTipo" />
@@ -95,7 +96,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
-                android:textColor="#444444"
+                android:textColor="@color/white"
                 tools:text="@string/hint_descripcion"
                 app:layout_constraintTop_toBottomOf="@id/tvTipo"
                 app:layout_constraintStart_toStartOf="parent"

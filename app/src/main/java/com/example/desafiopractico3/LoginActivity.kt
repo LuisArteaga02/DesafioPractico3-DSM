@@ -9,17 +9,26 @@ import androidx.lifecycle.lifecycleScope
 import com.example.desafiopractico3.ViewModel.LoginViewModel
 import kotlinx.coroutines.launch
 import com.example.desafiopractico3.databinding.ActivityLoginBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 class LoginActivity : AppCompatActivity() {
 
     private val viewModel: LoginViewModel by viewModels()
     // Asumiendo que usas ViewBinding
     private lateinit var binding: ActivityLoginBinding
+    private lateinit var auth: FirebaseAuth
+    private lateinit var db: FirebaseFirestore
+
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        auth = FirebaseAuth.getInstance()
+        db = FirebaseFirestore.getInstance()
 
         binding.btnLogin.setOnClickListener {
             val email = binding.etEmail.text.toString()
@@ -33,6 +42,41 @@ class LoginActivity : AppCompatActivity() {
 
         observarEstadoLogin()
     }
+    override fun onStart() {
+        super.onStart()
+        val usuarioActual = auth.currentUser
+
+        if (usuarioActual != null) {
+            binding.progressBar.visibility = View.VISIBLE
+            redirigirSegunRol(usuarioActual.uid)
+        }
+    }
+
+    private fun redirigirSegunRol(uid: String) {
+
+        db.collection("usuarios").document(uid).get()
+            .addOnSuccessListener { documento ->
+                binding.progressBar.visibility = View.GONE
+
+                if (documento != null && documento.exists()) {
+                    val rol = documento.getString("rol") ?: ""
+
+                    if (rol.equals("Docente", ignoreCase = true)) {
+                        startActivity(Intent(this, DocenteActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, MainActivity::class.java))
+                    }
+
+
+                    finish()
+                }
+            }
+            .addOnFailureListener {
+                binding.progressBar.visibility = View.GONE
+
+            }
+    }
+
 
     private fun observarEstadoLogin() {
         lifecycleScope.launch {
