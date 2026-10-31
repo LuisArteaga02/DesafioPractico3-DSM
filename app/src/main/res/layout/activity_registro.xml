@@ -16,7 +16,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Crear Cuenta"
+            android:text="@string/title_crear_cuenta"
             android:textSize="28sp"
             android:textStyle="bold"
             android:textColor="@color/white"
@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:background="@android:color/transparent"
-            android:hint="Correo Electrónico"
+            android:hint="@string/hint_correo"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Contraseña"
+            android:hint="@string/hint_password"
             android:textColor="@color/white"
             app:passwordToggleEnabled="true"
             android:background="@android:color/transparent"
@@ -58,7 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:hint="Confirmar Contraseña"
+            android:hint="@string/hint_confirmar_password"
             android:textColor="@color/white"
             app:passwordToggleEnabled="true"
             android:background="@android:color/transparent"
@@ -74,7 +74,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Selecciona tu rol:"
+            android:text="@string/lbl_selecciona_rol"
             android:textColor="@color/white"
             android:layout_marginTop="8dp"
             android:textStyle="bold"/>
@@ -91,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Alumno"
+                android:text="@string/rb_alumno"
                 android:textColor="@color/white"
                 android:checked="true"
                 android:layout_weight="1"/>
@@ -101,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
-                android:text="Docente"
+                android:text="@string/rb_docente"
                 android:textColor="@color/white"
                 android:layout_weight="1"/>
         </RadioGroup>
@@ -111,7 +111,7 @@
             android:layout_width="match_parent"
             android:background="@drawable/bg_boton_cristal"
             android:layout_height="56dp"
-            android:text="Registrarse"
+            android:text="@string/btn_registrarse"
             android:textSize="16sp"
             android:layout_marginBottom="16dp"/>
 
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:background="@android:color/transparent"
-            android:text="¿Ya tienes cuenta? Inicia sesión aquí"
+            android:text="@string/lbl_ya_tienes_cuenta"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:padding="8dp"/>

@@ -42,7 +42,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
-                    app:title="Mis Recursos"
+                    app:title="@string/title_mis_recursos"
 
                     app:titleCentered="true"
                     app:menu="@menu/menu_docente" />
@@ -86,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:iconifiedByDefault="false"
-                app:queryHint="Buscar por título o tipo..."
+                app:queryHint="@string/hint_buscar_completo"
                 app:queryBackground="@android:color/transparent" />
         </com.google.android.material.card.MaterialCardView>
     </com.google.android.material.appbar.AppBarLayout>
@@ -125,6 +125,6 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
         app:srcCompat="@android:drawable/ic_input_add"
-        android:contentDescription="Agregar recurso" />
+        android:contentDescription="@string/desc_agregar_recurso" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

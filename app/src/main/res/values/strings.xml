@@ -8,6 +8,7 @@
     <string name="title_crear_cuenta">Crear Cuenta</string>
     <string name="title_nuevo_recurso">Nuevo Recurso</string>
     <string name="title_iniciar_sesion">Iniciar Sesión</string>
+    <string name="etVideo">Video</string>
 
     <!-- Subtítulos y Textos -->
     <string name="subtitle_credenciales">Ingresa tus credenciales para continuar</string>

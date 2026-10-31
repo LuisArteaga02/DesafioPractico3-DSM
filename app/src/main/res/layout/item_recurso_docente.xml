@@ -40,7 +40,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="Título del Recurso Educativo" />
+            tools:text="@string/hint_titulo_recurso" />
 
         <TextView
             android:id="@+id/tvTipo"
@@ -52,7 +52,7 @@
             android:paddingVertical="4dp"
             android:textSize="12sp"
             android:textStyle="bold"
-            tools:text="VIDEO"
+            tools:text="@string/etVideo"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -66,7 +66,7 @@
             android:maxLines="2"
             android:ellipsize="end"
             android:textColor="@color/white"
-            tools:text="Esta es una breve descripción del recurso que no debe pasar de dos líneas para no romper el diseño de la tarjeta."
+            tools:text="@string/hint_descripcion"
             app:layout_constraintTop_toBottomOf="@id/tvTitulo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="Eliminar"
+            android:text="@string/btn_eliminar"
             android:textColor="#D32F2F"
             app:icon="@android:drawable/ic_menu_delete"
             app:iconTint="#D32F2F"
@@ -92,7 +92,7 @@
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Editar"
+            android:text="@string/btn_editar"
             app:icon="@android:drawable/ic_menu_edit"
             app:layout_constraintTop_toTopOf="@id/btnEliminar"
             app:layout_constraintBottom_toBottomOf="@id/btnEliminar"

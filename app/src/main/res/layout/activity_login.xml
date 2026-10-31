@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="Iniciar Sesión"
+        android:text="@string/title_iniciar_sesion"
         android:textSize="32sp"
         android:textStyle="bold"
         android:textColor="@color/white"
@@ -30,7 +30,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="Ingresa tus credenciales para continuar"
+        android:text="@string/subtitle_credenciales"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
-        android:hint="Correo electrónico"
+        android:hint="@string/hint_correo"
         app:startIconDrawable="@android:drawable/ic_dialog_email"
         app:layout_constraintTop_toBottomOf="@id/tvSubtitle">
 
@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Contraseña"
+        android:hint="@string/hint_password"
         app:endIconMode="password_toggle"
         app:startIconDrawable="@android:drawable/ic_lock_idle_lock"
         app:layout_constraintTop_toBottomOf="@id/tilEmail">
@@ -88,7 +88,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="32dp"
         android:background="@drawable/bg_boton_cristal"
-        android:text="Ingresar"
+        android:text="@string/btn_ingresar"
         android:textSize="16sp"
         app:cornerRadius="8dp"
         app:layout_constraintTop_toBottomOf="@id/tilPassword"
@@ -101,7 +101,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="¿No tienes cuenta? Regístrate aquí"
+        android:text="@string/lbl_no_tienes_cuenta"
         android:textColor="@color/white"
         android:textStyle="bold"
 

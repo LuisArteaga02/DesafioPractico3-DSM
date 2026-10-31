@@ -83,7 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:iconifiedByDefault="false"
-                app:queryHint="Buscar..."
+                app:queryHint="@string/hint_buscar"
                 app:queryBackground="@android:color/transparent" />
         </com.google.android.material.card.MaterialCardView>
 

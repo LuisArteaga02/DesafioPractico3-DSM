@@ -41,7 +41,7 @@
                     android:id="@+id/tvTituloFormulario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nuevo Recurso"
+                    android:text="@string/title_nuevo_recurso"
                     android:textSize="24sp"
                     android:textStyle="bold"
                     android:textColor="#111111"
@@ -51,7 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Título del recurso"
+                    android:hint="@string/hint_titulo_recurso"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etTitulo"
@@ -65,20 +65,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Tipo de recurso">
+                    android:hint="@string/hint_tipo_recurso">
                     <AutoCompleteTextView
                         android:id="@+id/etTipo"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:inputType="none"
-                        tools:text="VIDEO"/>
+                        tools:text="@string/etVideo"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
-                    android:hint="Enlace (URL)"
+                    android:hint="@string/hint_enlace"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etEnlace"
@@ -91,7 +91,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="24dp"
-                    android:hint="Descripción"
+                    android:hint="@string/hint_descripcion"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/etDescripcion"
@@ -107,7 +107,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@drawable/bg_boton_cristal"
-                    android:text="Guardar Recurso"
+                    android:text="@string/btn_guardar_recurso"
                     android:textSize="16sp"/>
 
                 <ProgressBar

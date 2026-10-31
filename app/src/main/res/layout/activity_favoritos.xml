@@ -35,7 +35,7 @@
 
                 app:navigationIcon="@android:drawable/ic_menu_revert"
                 app:navigationIconTint="#111111"
-                app:title="Mis Favoritos"
+                app:title="@string/title_mis_favoritos"
                 app:titleCentered="true" /> <!-- Tint oscuro para el icono de regresar -->
         </com.google.android.material.card.MaterialCardView>
 
@@ -54,7 +54,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Aún no tienes favoritos."
+        android:text="@string/msg_sin_favoritos"
         android:textSize="18sp"
         android:textColor="#333333"
         android:textStyle="bold"
