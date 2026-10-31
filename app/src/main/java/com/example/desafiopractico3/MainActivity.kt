@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
         cargarFavoritosDeFirebase()
     }
     private fun enviarCalificacionApi(recurso: Recurso, estrellas: Float) {
-        // Bloqueo de seguridad: si ya votó, ignoramos clics extra
         if (votosDelUsuario.containsKey(recurso.id)) return
 
         binding.progressBarCentral.visibility = View.VISIBLE
@@ -208,11 +207,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_docente, menu)
+        menuInflater.inflate(R.menu.menu_alumno, menu)
         return true
     }
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
+            R.id.action_ver_favoritos -> {
+                startActivity(Intent(this, FavoritosActivity::class.java))
+                true
+            }
             R.id.action_logout -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, LoginActivity::class.java).apply {
@@ -223,6 +226,7 @@ class MainActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+
     }
 
 

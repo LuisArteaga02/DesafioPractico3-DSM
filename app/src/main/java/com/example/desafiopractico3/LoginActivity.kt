@@ -26,6 +26,10 @@ class LoginActivity : AppCompatActivity() {
             val pass = binding.etPassword.text.toString()
             viewModel.iniciarSesion(email, pass)
         }
+        binding.tvIrRegistro.setOnClickListener {
+            intent = Intent(this@LoginActivity, RegistroActivity::class.java)
+            startActivity(intent)
+        }
 
         observarEstadoLogin()
     }
@@ -50,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
                             Intent(this@LoginActivity, DocenteActivity::class.java)
                            // Intent(this@LoginActivity, MainActivity::class.java)
                         } else {
-                           // Intent(this@LoginActivity, EstudianteActivity::class.java)
+
                             Intent(this@LoginActivity, MainActivity::class.java)
                         }
                         startActivity(intent)
