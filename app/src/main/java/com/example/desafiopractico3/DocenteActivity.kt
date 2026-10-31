@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -30,11 +31,13 @@ class DocenteActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.topAppBar)
 
-
         configurarRecyclerView()
         configurarSwipeRefresh()
         configurarFab()
+    }
 
+    override fun onResume() {
+        super.onResume()
         obtenerRecursosDesdeApi()
     }
 
@@ -44,18 +47,19 @@ class DocenteActivity : AppCompatActivity() {
         adapter = RecursosAdapter(
             listaRecursos = emptyList(),
             onEditarClick = { recurso ->
-                // TODO: Navegar a FormularioActivity enviando los datos del recurso a editar
-                Toast.makeText(this, "Editar: ${recurso.titulo}", Toast.LENGTH_SHORT).show()
+                // MODO EDITAR: Abrimos el formulario enviando el objeto completo
+                val intent = Intent(this, FormularioActivity::class.java)
+                intent.putExtra("recurso", recurso)
+                startActivity(intent)
             },
             onEliminarClick = { recurso ->
-                // TODO: Llamar al endpoint de DELETE de Retrofit
-                Toast.makeText(this, "Eliminar: ${recurso.titulo}", Toast.LENGTH_SHORT).show()
+                // MODO ELIMINAR: Mostramos un diálogo de confirmación antes de borrar
+                mostrarDialogoEliminar(recurso.id, recurso.titulo)
             }
         )
         binding.rvRecursos.layoutManager = LinearLayoutManager(this)
         binding.rvRecursos.adapter = adapter
     }
-
     private fun configurarSwipeRefresh() {
         binding.swipeRefresh.setOnRefreshListener {
             // Se ejecuta al arrastrar la lista hacia abajo
@@ -110,11 +114,47 @@ class DocenteActivity : AppCompatActivity() {
 
                 withContext(Dispatchers.Main) {
                     binding.progressBarCentral.visibility = View.GONE
-                    binding.swipeRefresh.isRefreshing = false 
+                    binding.swipeRefresh.isRefreshing = false
                 }
             }
         }
     }
+
+    private fun mostrarDialogoEliminar(id: Int, titulo: String) {
+        AlertDialog.Builder(this)
+            .setTitle("Eliminar recurso")
+            .setMessage("¿Estás seguro de que deseas eliminar '$titulo'?")
+            .setPositiveButton("Sí, eliminar") { _, _ ->
+                eliminarRecursoEnApi(id)
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
+    }
+
+    private fun eliminarRecursoEnApi(id: Int) {
+        binding.progressBarCentral.visibility = View.VISIBLE
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.apiService.eliminarRecurso(id)
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        Toast.makeText(this@DocenteActivity, "Recurso eliminado", Toast.LENGTH_SHORT).show()
+                        obtenerRecursosDesdeApi() // Recargamos la lista
+                    } else {
+                        Toast.makeText(this@DocenteActivity, "Error al eliminar", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                mostrarError("Error de conexión.")
+            } finally {
+                withContext(Dispatchers.Main) {
+                    binding.progressBarCentral.visibility = View.GONE
+                }
+            }
+        }
+    }
+
 
     // --- MENÚ Y CIERRE DE SESIÓN ---
 

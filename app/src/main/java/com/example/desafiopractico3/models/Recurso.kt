@@ -1,6 +1,7 @@
 package com.example.desafiopractico3.models
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Recurso(
     @SerializedName("id") val id: Int = 0,
@@ -11,4 +12,4 @@ data class Recurso(
     @SerializedName("imagen") val imagen: String,
     @SerializedName("rating_sum") val ratingSum: Int = 0,
     @SerializedName("rating_count") val ratingCount: Int = 0
-)
+): Serializable
