@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var adapter: AlumnoAdapter
     private val favoritosDelUsuario = mutableSetOf<Int>()
     private val votosDelUsuario = mutableMapOf<Int, Float>()
+    private var listaCompletaRecursos: List<Recurso> = emptyList()
 
     private val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         configurarSwipeRefresh()
 
         obtenerRecursosDesdeApi()
+        configurarBuscador()
     }
     private fun configurarRecyclerView() {
         adapter = AlumnoAdapter(
@@ -183,9 +185,11 @@ class MainActivity : AppCompatActivity() {
             try {
                 val response = RetrofitClient.apiService.getRecursos()
                 if (response.isSuccessful) {
-                    val lista = response.body() ?: emptyList()
+                    listaCompletaRecursos = response.body() ?: emptyList()
                     withContext(Dispatchers.Main) {
-                        adapter.actualizarLista(lista)
+                        binding.searchView.setQuery("", false)
+                        binding.searchView.clearFocus()
+                        adapter.actualizarLista(listaCompletaRecursos)
                     }
                 } else {
                     mostrarError("Error al cargar datos")
@@ -200,6 +204,36 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    private fun configurarBuscador() {
+        binding.searchView.setOnQueryTextListener(object : androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filtrarLista(newText ?: "")
+                return true
+            }
+        })
+    }
+
+    private fun filtrarLista(query: String) {
+        val textoBusqueda = query.lowercase().trim()
+
+        if (textoBusqueda.isEmpty()) {
+            adapter.actualizarLista(listaCompletaRecursos)
+            return
+        }
+
+        val listaFiltrada = listaCompletaRecursos.filter { recurso ->
+            recurso.titulo.lowercase().contains(textoBusqueda) ||
+                    recurso.tipo.lowercase().contains(textoBusqueda)
+        }
+
+        adapter.actualizarLista(listaFiltrada)
+    }
+
     private suspend fun mostrarError(mensaje: String) {
         withContext(Dispatchers.Main) {
             Toast.makeText(this@MainActivity, mensaje, Toast.LENGTH_LONG).show()
