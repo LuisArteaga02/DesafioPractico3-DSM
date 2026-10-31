@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.example.desafiopractico3.ViewModel.LoginViewModel
 import kotlinx.coroutines.launch
+import com.example.desafiopractico3.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
 
@@ -46,12 +47,14 @@ class LoginActivity : AppCompatActivity() {
 
                         // Enrutamiento condicional según el laboratorio
                         val intent = if (state.rol == "docente") {
-                            Intent(this@LoginActivity, DocenteActivity::class.java)
+                          //  Intent(this@LoginActivity, DocenteActivity::class.java)
+                            Intent(this@LoginActivity, MainActivity::class.java)
                         } else {
-                            Intent(this@LoginActivity, EstudianteActivity::class.java)
+                           // Intent(this@LoginActivity, EstudianteActivity::class.java)
+                            Intent(this@LoginActivity, MainActivity::class.java)
                         }
                         startActivity(intent)
-                        finish() // Cierra el login para que no puedan volver con el botón "Atrás"
+                        finish()
                     }
                     is LoginViewModel.LoginState.Error -> {
                         binding.progressBar.visibility = View.GONE
