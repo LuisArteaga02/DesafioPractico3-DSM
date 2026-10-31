@@ -1,6 +1,6 @@
 # DesafioPractico3-DSM
 [![My Skills](https://skillicons.dev/icons?i=kotlin,nodejs,&theme=dark)](https://skillicons.dev)
-# Desarrollo de aplicacion con multiples pantallas con roles de usuarios y uso de node.js en parte backend para la api de la aplicacion y haciendo deploy en el webservice de [Render.com](https://dashboard.render.com/)
+### Desarrollo de aplicacion con multiples pantallas con roles de usuarios y uso de node.js en parte backend para la api de la aplicacion y haciendo deploy en el webservice de [Render.com](https://dashboard.render.com/)
 
 [Repositorio de Api de la aplicacion android /Recursos](https://github.com/YCartaArt02/api-dsm3)
 <br>
