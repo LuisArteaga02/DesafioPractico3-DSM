@@ -69,8 +69,9 @@ class DocenteActivity : AppCompatActivity() {
 
     private fun configurarFab() {
         binding.fabAgregar.setOnClickListener {
-            // TODO: Abrir FormularioActivity en modo "Crear nuevo"
-            Toast.makeText(this, "Pantalla para agregar recurso", Toast.LENGTH_SHORT).show()
+            // MODO CREAR: Abrimos el formulario vacío
+            val intent = Intent(this, FormularioActivity::class.java)
+            startActivity(intent)
         }
     }
 
