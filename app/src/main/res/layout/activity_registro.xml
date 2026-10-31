@@ -3,10 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:background="@drawable/bg_gradiand_glass"
     android:padding="24dp">
 
     <LinearLayout
+        android:paddingTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -17,6 +19,7 @@
             android:text="Crear Cuenta"
             android:textSize="28sp"
             android:textStyle="bold"
+            android:textColor="@color/white"
             android:layout_marginBottom="24dp"
             android:layout_gravity="center"/>
 
@@ -30,6 +33,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
+                android:textColor="@color/white"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
@@ -39,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Contraseña"
+            android:textColor="@color/white"
             app:passwordToggleEnabled="true"
             android:background="@android:color/transparent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -54,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="Confirmar Contraseña"
+            android:textColor="@color/white"
             app:passwordToggleEnabled="true"
             android:background="@android:color/transparent"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -69,6 +75,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Selecciona tu rol:"
+            android:textColor="@color/white"
             android:layout_marginTop="8dp"
             android:textStyle="bold"/>
 
@@ -85,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Alumno"
+                android:textColor="@color/white"
                 android:checked="true"
                 android:layout_weight="1"/>
 
@@ -94,6 +102,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:text="Docente"
+                android:textColor="@color/white"
                 android:layout_weight="1"/>
         </RadioGroup>
 
@@ -117,10 +126,10 @@
             android:id="@+id/tvIrLogin"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/white"
             android:background="@android:color/transparent"
             android:text="¿Ya tienes cuenta? Inicia sesión aquí"
             android:layout_gravity="center"
-            android:textColor="?attr/colorPrimary"
             android:layout_marginTop="8dp"
             android:padding="8dp"/>
 

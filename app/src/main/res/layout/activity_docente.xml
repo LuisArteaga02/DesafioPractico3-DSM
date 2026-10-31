@@ -10,6 +10,7 @@
 
     <!-- Barra superior -->
     <com.google.android.material.appbar.AppBarLayout
+        android:paddingTop="100dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
@@ -42,6 +43,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:background="@android:color/transparent"
                     app:title="Mis Recursos"
+
                     app:titleCentered="true"
                     app:menu="@menu/menu_docente" />
             </com.google.android.material.card.MaterialCardView>

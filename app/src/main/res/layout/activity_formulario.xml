@@ -5,10 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="80dp"
     android:background="@drawable/bg_gradiand_glass"
     tools:context=".FormularioActivity">
 
     <ScrollView
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
@@ -17,6 +19,7 @@
 
         <!-- Cristal Nativo: Fondo 30% blanco, sin sombra, borde brillante -->
         <com.google.android.material.card.MaterialCardView
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
@@ -28,6 +31,7 @@
 
             <!-- Tu formulario directo, sin librerías intermedias -->
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

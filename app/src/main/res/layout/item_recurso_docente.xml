@@ -25,20 +25,23 @@
         android:padding="16dp">
 
         <!-- Título del Recurso -->
+
+        <!-- Etiqueta de Tipo (Ej. Video, PDF, Enlace) -->
         <TextView
             android:id="@+id/tvTitulo"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/white"
+
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="?attr/colorOnSurface"
-            tools:text="Título del Recurso Educativo"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/tvTipo"
-            android:layout_marginEnd="8dp"/>
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Título del Recurso Educativo" />
 
-        <!-- Etiqueta de Tipo (Ej. Video, PDF, Enlace) -->
         <TextView
             android:id="@+id/tvTipo"
             android:layout_width="wrap_content"
@@ -59,9 +62,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+
             android:maxLines="2"
             android:ellipsize="end"
-            android:textColor="?attr/colorOnSurfaceVariant"
+            android:textColor="@color/white"
             tools:text="Esta es una breve descripción del recurso que no debe pasar de dos líneas para no romper el diseño de la tarjeta."
             app:layout_constraintTop_toBottomOf="@id/tvTitulo"
             app:layout_constraintStart_toStartOf="parent"
@@ -84,6 +88,7 @@
         <!-- Botón Editar -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnEditar"
+            android:textColor="@color/black"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
