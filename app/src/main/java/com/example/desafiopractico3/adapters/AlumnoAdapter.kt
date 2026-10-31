@@ -10,6 +10,7 @@ import com.example.desafiopractico3.models.Recurso
 class AlumnoAdapter(
     private var listaRecursos: List<Recurso>,
     private val favoritosIds: Set<Int>,
+    private val votosPersonales: Map<Int, Float>,
     private val onAbrirEnlaceClick: (String) -> Unit,
     private val onFavoritoClick: (Recurso, Boolean) -> Unit,
     private val onRatingChange: (Recurso, Float) -> Unit
@@ -20,6 +21,20 @@ class AlumnoAdapter(
             binding.tvTitulo.text = recurso.titulo
             binding.tvTipo.text = recurso.tipo
             binding.tvDescripcion.text = recurso.descripcion
+            binding.ratingBar.onRatingBarChangeListener = null
+            val miVoto = votosPersonales[recurso.id]
+
+
+            if (miVoto != null) {
+
+                binding.ratingBar.rating = miVoto
+                binding.ratingBar.setIsIndicator(true)
+            } else {
+
+                val promedio = if (recurso.ratingCount > 0) recurso.ratingSum.toFloat() / recurso.ratingCount else 0f
+                binding.ratingBar.rating = promedio
+                binding.ratingBar.setIsIndicator(false)
+            }
 
             val promedio = if (recurso.ratingCount > 0) {
                 recurso.ratingSum.toFloat() / recurso.ratingCount
@@ -29,6 +44,11 @@ class AlumnoAdapter(
             binding.ratingBar.rating = promedio
             binding.tvRatingCount.text = "(${recurso.ratingCount})"
 
+            binding.ratingBar.setOnRatingBarChangeListener { _, rating, fromUser ->
+                if (fromUser) {
+                    onRatingChange(recurso, rating)
+                }
+            }
             val esFavorito = favoritosIds.contains(recurso.id)
             if (esFavorito) {
                 binding.btnFavorito.setImageResource(R.drawable.ic_favorite) // Corazón lleno

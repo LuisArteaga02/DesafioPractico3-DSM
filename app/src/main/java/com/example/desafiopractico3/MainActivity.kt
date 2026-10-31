@@ -22,6 +22,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var adapter: AlumnoAdapter
     private val favoritosDelUsuario = mutableSetOf<Int>()
+    private val votosDelUsuario = mutableMapOf<Int, Float>()
+
     private val db = com.google.firebase.firestore.FirebaseFirestore.getInstance()
     private val uid = FirebaseAuth.getInstance().currentUser?.uid ?: ""
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,12 +42,13 @@ class MainActivity : AppCompatActivity() {
         adapter = AlumnoAdapter(
             listaRecursos = emptyList(),
             favoritosIds = favoritosDelUsuario,
+            votosPersonales = votosDelUsuario,
             onAbrirEnlaceClick = { url -> abrirEnlaceEnNavegador(url) },
             onFavoritoClick = { recurso, marcarComoFavorito ->
                 gestionarFavorito(recurso, marcarComoFavorito)
             },
             onRatingChange = { recurso, nuevaCalificacion ->
-                // TODO: Enviar el rating por PUT a Retrofit
+                enviarCalificacionApi(recurso, nuevaCalificacion.toFloat())
             }
         )
         binding.rvRecursosAlumno.layoutManager = LinearLayoutManager(this)
@@ -53,6 +56,74 @@ class MainActivity : AppCompatActivity() {
 
         cargarFavoritosDeFirebase()
     }
+    private fun enviarCalificacionApi(recurso: Recurso, estrellas: Float) {
+        // Bloqueo de seguridad: si ya votó, ignoramos clics extra
+        if (votosDelUsuario.containsKey(recurso.id)) return
+
+        binding.progressBarCentral.visibility = View.VISIBLE
+
+        val recursoActualizado = recurso.copy(
+            ratingSum = recurso.ratingSum + estrellas.toInt(),
+            ratingCount = recurso.ratingCount + 1
+        )
+
+        lifecycleScope.launch(Dispatchers.IO) {
+            try {
+                val response = RetrofitClient.apiService.actualizarRecurso(recurso.id, recursoActualizado)
+
+                withContext(Dispatchers.Main) {
+                    if (response.isSuccessful) {
+                        val datosVoto = hashMapOf(
+                            "idRecurso" to recurso.id,
+                            "estrellas" to estrellas
+                        )
+                        db.collection("usuarios").document(uid).collection("votos")
+                            .document(recurso.id.toString())
+                            .set(datosVoto)
+                            .addOnSuccessListener {
+                                votosDelUsuario[recurso.id] = estrellas // Lo guardamos en local
+                                Toast.makeText(this@MainActivity, "¡Voto registrado!", Toast.LENGTH_SHORT).show()
+                                obtenerRecursosDesdeApi() // Refrescamos la pantalla
+                            }
+                    } else {
+                        Toast.makeText(this@MainActivity, "Error al enviar voto", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(this@MainActivity, "Error de conexión", Toast.LENGTH_SHORT).show()
+                }
+            } finally {
+                withContext(Dispatchers.Main) {
+                    binding.progressBarCentral.visibility = View.GONE
+                }
+            }
+        }
+    }
+    private fun cargarDatosDeFirebase() {
+        if (uid.isEmpty()) return
+
+        // Cargar Favoritos
+        db.collection("usuarios").document(uid).collection("favoritos")
+            .get().addOnSuccessListener { docs ->
+                favoritosDelUsuario.clear()
+                docs.forEach { favoritosDelUsuario.add(it.getLong("idRecurso")!!.toInt()) }
+                adapter.notifyDataSetChanged()
+            }
+
+        // Cargar Votos Personales
+        db.collection("usuarios").document(uid).collection("votos")
+            .get().addOnSuccessListener { docs ->
+                votosDelUsuario.clear()
+                docs.forEach { doc ->
+                    val id = doc.getLong("idRecurso")?.toInt()
+                    val estrellas = doc.getDouble("estrellas")?.toFloat()
+                    if (id != null && estrellas != null) votosDelUsuario[id] = estrellas
+                }
+                adapter.notifyDataSetChanged()
+            }
+    }
+
     private fun abrirEnlaceEnNavegador(url: String) {
         try {
             var urlFormateada = url
